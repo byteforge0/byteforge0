@@ -1,5 +1,5 @@
 # 💫 About Me:
-🔭 I’m currently working on cybersecurity labs using Kali Linux and practicing ethical hacking techniques.  <br><br>🤝 I’m looking to collaborate on security research, CTFs, and defensive security projects.  <br><br>👐 I’m looking for help with advanced penetration testing methods and blue-team fundamentals.  <br><br>🌱 I’m currently learning network security, penetration testing basics, and phishing awareness analysis.  <br><br>💬 Ask me about Kali Linux tools, cybersecurity fundamentals, and online safety practices.  <br><br>⚡ Fun fact I enjoy breaking things in labs just to understand how to secure them better.<br>
+🔭 I’m currently working on cybersecurity labs using Kali Linux and practicing ethical hacking techniques.  <br><br>🤝 I’m looking to collaborate on security research, CTFs, and defensive security projects.  <br><br>👐 I’m looking for help with advanced penetration testing methods and Red-team fundamentals.  <br><br>🌱 I’m currently learning network security, penetration testing basics, and phishing awareness analysis.  <br><br>💬 Ask me about Kali Linux tools, cybersecurity fundamentals, and online safety practices.  <br><br>⚡ Fun fact I enjoy breaking things in labs just to understand how to secure them better.<br>
 
 
 ## 🌐 Socials:
