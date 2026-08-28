@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#0b0b0c">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Alltag">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icon.svg">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/app.css">
+  <title>Alltag</title>
+</head>
+<body>
+  <div class="app-shell">
+    <main id="screen" class="app-content"></main>
+    <nav id="tabbar" class="tabbar" aria-label="Hauptnavigation">
+      <button class="tab-button" data-tab="home" aria-label="Übersicht"><span class="nav-icon">⌂</span><span>Übersicht</span></button>
+      <button class="tab-button" data-tab="money" aria-label="Geld"><span class="nav-icon">◫</span><span>Geld</span></button>
+      <button class="quick-button" data-action="open-quick" aria-label="Schnell hinzufügen">+</button>
+      <button class="tab-button" data-tab="car" aria-label="Auto"><span class="nav-icon">⌁</span><span>Auto</span></button>
+      <button class="tab-button" data-tab="day" aria-label="Tag"><span class="nav-icon">☺</span><span>Tag</span></button>
+      <button class="tab-button" data-tab="remember" aria-label="Merken"><span class="nav-icon">▱</span><span>Merken</span></button>
+    </nav>
+  </div>
+  <div id="sheet-root"></div>
+  <input id="backup-input" type="file" accept="application/json" hidden>
+  <script src="/app-base.js" defer></script>
+  <script src="/app-pages.js" defer></script>
+  <script src="/app-sheets.js" defer></script>
+  <script src="/app-main.js" defer></script>
+</body>
+</html>
