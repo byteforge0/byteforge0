@@ -23,7 +23,8 @@ export default async function handler(req, res) {
 
     const state = crypto.randomBytes(24).toString('base64url');
     const max = Number(revolut.maximum_consent_validity) || 90 * 24 * 60 * 60;
-    const seconds = Math.max(3600, max - 300);
+    const requested = 30 * 24 * 60 * 60;
+    const seconds = Math.max(3600, Math.min(requested, Math.max(3600, max - 300)));
     const validUntil = new Date(Date.now() + seconds * 1000).toISOString();
 
     const auth = await ebFetch('/auth', {
@@ -33,8 +34,7 @@ export default async function handler(req, res) {
         aspsp: { name: revolut.name, country: revolut.country },
         state,
         redirect_url: CALLBACK,
-        psu_type: 'personal',
-        language: 'de',
+        psu_type: 'personal'
       }),
     });
 
