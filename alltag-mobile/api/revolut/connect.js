@@ -12,6 +12,15 @@ export default async function handler(req, res) {
     const revolut = banks.find(b => /^revolut$/i.test(b.name)) || banks.find(b => /revolut/i.test(b.name));
     if (!revolut) return res.status(503).send('Revolut ist bei Enable Banking für Deutschland gerade nicht verfügbar.');
 
+    console.info('revolut-aspsp', JSON.stringify({
+      name: revolut.name,
+      country: revolut.country,
+      psu_types: revolut.psu_types,
+      maximum_consent_validity: revolut.maximum_consent_validity,
+      auth_methods: (revolut.auth_methods || []).map(m => ({ name: m.name, approach: m.approach, psu_type: m.psu_type, hidden_method: m.hidden_method, credentials: (m.credentials || []).map(c => ({ name: c.name, required: c.required })) })),
+      required_psu_headers: revolut.required_psu_headers || []
+    }));
+
     const state = crypto.randomBytes(24).toString('base64url');
     const max = Number(revolut.maximum_consent_validity) || 90 * 24 * 60 * 60;
     const seconds = Math.max(3600, max - 300);
@@ -20,7 +29,7 @@ export default async function handler(req, res) {
     const auth = await ebFetch('/auth', {
       method: 'POST',
       body: JSON.stringify({
-        access: { valid_until: validUntil, balances: true, transactions: false },
+        access: { valid_until: validUntil, balances: true },
         aspsp: { name: revolut.name, country: revolut.country },
         state,
         redirect_url: CALLBACK,
