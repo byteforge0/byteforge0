@@ -18,8 +18,12 @@ export default async function handler(req, res) {
   const { code, state, error, error_description } = req.query || {};
   const expectedState = getCookie(req, 'alltag_revolut_state');
 
-  if (error) return res.redirect(302, `/?revolut=error&message=${encodeURIComponent(error_description || error)}`);
+  if (error) {
+    console.warn('revolut-bank-error', JSON.stringify({ error, error_description: error_description || '' }));
+    return res.redirect(302, `/?revolut=error&message=${encodeURIComponent(error_description || error)}`);
+  }
   if (!code || !state || !expectedState || state !== expectedState) {
+    console.warn('revolut-callback-state', JSON.stringify({ hasCode: !!code, hasState: !!state, hasCookie: !!expectedState, stateMatches: !!state && !!expectedState && state === expectedState }));
     return res.redirect(302, '/?revolut=error&message=Ung%C3%BCltige%20R%C3%BCckmeldung');
   }
 
@@ -30,10 +34,6 @@ export default async function handler(req, res) {
     });
 
     let accounts = normalizeAccounts(session);
-
-    // The POST /sessions response normally contains full AccountResource objects.
-    // If a bank/provider returns only account references, fetch the session once
-    // more and recover UIDs from accounts_data.
     if (!accounts.length && session?.session_id) {
       const details = await ebFetch(`/sessions/${encodeURIComponent(session.session_id)}`);
       const byUid = Array.isArray(details?.accounts_data) ? details.accounts_data : [];
