@@ -1,0 +1,24 @@
+/* Alltag v1.3 – mobile polish & reliability */
+:root{--tap:rgba(255,255,255,.055)}
+html{-webkit-text-size-adjust:100%}
+button{touch-action:manipulation}
+.tab-button{border-radius:13px;transition:background .16s ease,color .16s ease,transform .12s ease}
+.tab-button.active{background:rgba(255,255,255,.055)}
+.tab-button .nav-icon{width:22px;height:22px}
+.tab-button .nav-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tab-button>span:last-child{font-size:10px!important;letter-spacing:-.01em}
+.quick-button{font-size:24px;font-weight:420;box-shadow:0 5px 20px rgba(0,0,0,.38)}
+.available-card small{font-size:10px;color:var(--muted);margin-top:4px}
+.due-card{min-height:58px;padding:11px 13px;display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:9px;margin:0 0 8px;text-align:left}
+.due-card>div{display:flex;flex-direction:column;gap:3px}.due-card strong{font-size:12.5px}.due-card small{font-size:10px;color:var(--muted)}.due-card>b{font-size:18px;color:#66666c}.due-card.overdue{border-color:rgba(255,107,107,.25);background:rgba(255,107,107,.055)}.due-card.soon{border-color:rgba(244,198,93,.2)}
+.goal-main{width:100%;text-align:left;color:inherit}.goal-history-link{width:100%;height:37px;margin-top:12px;border-top:1px solid var(--line);color:var(--accent);font-size:11px;font-weight:700;text-align:left;padding-top:10px}.goal-history-summary{display:flex;justify-content:space-between;gap:10px;margin:10px 1px 15px;color:var(--muted);font-size:10.5px}.goal-tx-list span{display:flex!important;flex-direction:column;gap:2px}.goal-tx-list small{color:var(--muted);font-size:9.5px}
+.inline-buttons{gap:12px}.inline-buttons button{white-space:nowrap}.inline-buttons button:nth-child(2){margin-left:auto}
+.txn-edit-main{text-align:left;color:inherit;padding:9px 0;min-height:54px;justify-content:center}.mini-icon-action{width:30px;height:34px;border-radius:10px;display:grid;place-items:center;color:#77777c;font-size:19px;flex:0 0 auto}.mini-icon-action:active{background:var(--tap)}
+.reminder-row.overdue .round-icon{background:rgba(255,107,107,.11)}.reminder-row.overdue .grow span{color:var(--red)}.reminder-row.soon .grow span{color:var(--yellow)}
+.quiet-note{font-size:11px;color:var(--muted);padding:3px 2px 6px}.mood-note{display:block!important;white-space:normal!important;color:#b7b7bc!important;line-height:1.35;margin-top:3px;font-size:10.5px!important}
+.day-stats .summary-card{min-height:76px}
+.sheet{scrollbar-width:none}.sheet::-webkit-scrollbar{display:none}
+.sheet-save{position:relative}.sheet-save:active{transform:scale(.992)}
+.field input,.field select,.field textarea{font-size:16px}
+.toast{bottom:calc(88px + env(safe-area-inset-bottom))!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
