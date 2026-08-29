@@ -1,10 +1,12 @@
 import crypto from 'node:crypto';
-import { ebFetch, cookie, getPrivateKey } from '../_lib/enablebanking.js';
+import { ebFetch, cookie, getPrivateKey, signCookiePayload } from '../_lib/enablebanking.js';
+import { createLinkRecord, tokenHash } from '../_lib/revolut-link.js';
 
 const CALLBACK = 'https://alltag-mobile.vercel.app/api/revolut/callback';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).send('Method not allowed');
+  res.setHeader('Cache-Control', 'no-store');
   try {
     getPrivateKey();
     const result = await ebFetch('/aspsps?country=DE&psu_type=personal&service=AIS');
@@ -12,16 +14,14 @@ export default async function handler(req, res) {
     const revolut = banks.find(b => /^revolut$/i.test(b.name)) || banks.find(b => /revolut/i.test(b.name));
     if (!revolut) return res.status(503).send('Revolut ist bei Enable Banking für Deutschland gerade nicht verfügbar.');
 
-    console.info('revolut-aspsp', JSON.stringify({
-      name: revolut.name,
-      country: revolut.country,
-      psu_types: revolut.psu_types,
-      maximum_consent_validity: revolut.maximum_consent_validity,
-      auth_methods: (revolut.auth_methods || []).map(m => ({ name: m.name, approach: m.approach, psu_type: m.psu_type, hidden_method: m.hidden_method, credentials: (m.credentials || []).map(c => ({ name: c.name, required: c.required })) })),
-      required_psu_headers: revolut.required_psu_headers || []
-    }));
+    const claimToken = crypto.randomBytes(32).toString('base64url');
+    const linkId = await createLinkRecord({
+      status: 'pending',
+      claimHash: tokenHash(claimToken),
+      createdAt: new Date().toISOString()
+    });
+    const state = signCookiePayload({ purpose: 'revolut-link', linkId, exp: Date.now() + 20 * 60 * 1000 });
 
-    const state = crypto.randomBytes(24).toString('base64url');
     const max = Number(revolut.maximum_consent_validity) || 90 * 24 * 60 * 60;
     const requested = 30 * 24 * 60 * 60;
     const seconds = Math.max(3600, Math.min(requested, Math.max(3600, max - 300)));
@@ -39,10 +39,16 @@ export default async function handler(req, res) {
     });
 
     if (!auth?.url) return res.status(502).send('Enable Banking hat keine Weiterleitungs-URL geliefert.');
-    res.setHeader('Set-Cookie', cookie('alltag_revolut_state', state, 15 * 60));
+
+    if (String(req.query?.format || '').toLowerCase() === 'json') {
+      return res.status(200).json({ url: auth.url, linkId, claimToken });
+    }
+
+    // Legacy/browser fallback. The PWA uses the JSON handoff above.
+    res.setHeader('Set-Cookie', cookie('alltag_revolut_state', state, 20 * 60));
     return res.redirect(302, auth.url);
   } catch (error) {
     console.error('revolut-connect', error?.status, error?.body || error?.message);
-    return res.status(503).send('Revolut-Verbindung ist noch nicht eingerichtet. Prüfe das Vercel-Secret und die Enable-Banking-Aktivierung.');
+    return res.status(503).send('Revolut-Verbindung konnte nicht gestartet werden.');
   }
 }
