@@ -2,13 +2,33 @@ import { ebFetch, signCookiePayload, verifyCookiePayload } from '../_lib/enableb
 import { createHandoffToken } from '../_lib/c24-handoff.js';
 
 function normalizeAccounts(session) {
+  const found = new Map();
+
+  const add = (uid, meta = {}) => {
+    if (!uid || typeof uid !== 'string') return;
+    const id = uid.trim();
+    if (!id || found.has(id)) return;
+    found.set(id, {
+      uid: id,
+      currency: meta.currency || '',
+      product: meta.product || '',
+      details: meta.details || ''
+    });
+  };
+
   const direct = Array.isArray(session?.accounts) ? session.accounts : [];
-  return direct.filter(a => a?.uid).slice(0, 8).map(a => ({
-    uid: a.uid,
-    currency: a.currency || '',
-    product: a.product || '',
-    details: a.details || ''
-  }));
+  for (const account of direct) {
+    if (typeof account === 'string') add(account);
+    else if (account && typeof account === 'object') add(account.uid, account);
+  }
+
+  const accountData = Array.isArray(session?.accounts_data) ? session.accounts_data : [];
+  for (const account of accountData) {
+    if (typeof account === 'string') add(account);
+    else if (account && typeof account === 'object') add(account.uid, account);
+  }
+
+  return [...found.values()].slice(0, 8);
 }
 
 function escapeHtml(value) {
@@ -37,12 +57,21 @@ export default async function handler(req, res) {
   try {
     const session = await ebFetch('/sessions', { method: 'POST', body: JSON.stringify({ code }) });
     let accounts = normalizeAccounts(session);
+
     if (!accounts.length && session?.session_id) {
       const details = await ebFetch(`/sessions/${encodeURIComponent(session.session_id)}`);
-      const byUid = Array.isArray(details?.accounts_data) ? details.accounts_data : [];
-      accounts = byUid.filter(a => a?.uid).slice(0, 8).map(a => ({ uid:a.uid, currency:'', product:'', details:'' }));
+      accounts = normalizeAccounts(details);
     }
-    if (!accounts.length) throw new Error('Keine Konten zurückgegeben');
+
+    if (!accounts.length) {
+      console.warn('c24-session-no-accounts', JSON.stringify({
+        sessionId: !!session?.session_id,
+        accountCount: Array.isArray(session?.accounts) ? session.accounts.length : null,
+        accountDataCount: Array.isArray(session?.accounts_data) ? session.accounts_data.length : null,
+        accountTypes: Array.isArray(session?.accounts) ? session.accounts.slice(0, 4).map(a => typeof a) : []
+      }));
+      throw new Error('Keine Konten zurückgegeben');
+    }
 
     const validUntil = session?.access?.valid_until || null;
     const cookiePayload = signCookiePayload({ sessionId:session.session_id, accounts, validUntil, connectedAt:new Date().toISOString() });
