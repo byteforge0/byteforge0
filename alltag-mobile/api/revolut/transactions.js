@@ -1,0 +1,8 @@
+import { handleBankTransactions } from '../_lib/bank-transactions.js';
+
+export default function handler(req, res) {
+  return handleBankTransactions(req, res, {
+    cookieName: 'alltag_revolut',
+    provider: 'revolut'
+  });
+}
