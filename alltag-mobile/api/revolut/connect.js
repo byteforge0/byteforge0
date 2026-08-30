@@ -24,7 +24,11 @@ export default async function handler(req, res) {
     const auth = await ebFetch('/auth', {
       method: 'POST',
       body: JSON.stringify({
-        access: { valid_until: new Date(Date.now() + seconds * 1000).toISOString(), balances: true },
+        access: {
+          valid_until: new Date(Date.now() + seconds * 1000).toISOString(),
+          balances: true,
+          transactions: true
+        },
         aspsp: { name: revolut.name, country: revolut.country },
         state,
         redirect_url: CALLBACK,
