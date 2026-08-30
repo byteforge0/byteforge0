@@ -1,5 +1,5 @@
-const CACHE='alltag-v1.5.0';
-const SHELL=['/','/index.html','/manifest.webmanifest','/icon.svg','/revolut-v14.css','/revolut-v14.js','/c24-v15.css','/c24-v15.js'];
+const CACHE='alltag-v1.6.0';
+const SHELL=['/','/index.html','/manifest.webmanifest','/icon.svg','/revolut-v14.css','/revolut-v14.js','/c24-v15.css','/c24-v15.js','/bank-sync-v16.css','/bank-sync-v16.js'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>Promise.allSettled(SHELL.map(url=>cache.add(url)))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',event=>{
