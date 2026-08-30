@@ -2,13 +2,27 @@ import { ebFetch, signCookiePayload, verifyCookiePayload } from '../_lib/enableb
 import { createHandoffToken } from '../_lib/revolut-handoff.js';
 
 function normalizeAccounts(session) {
-  const direct = Array.isArray(session?.accounts) ? session.accounts : [];
-  return direct.filter(a => a?.uid).slice(0, 8).map(a => ({
-    uid: a.uid,
-    currency: a.currency || '',
-    product: a.product || '',
-    details: a.details || ''
-  }));
+  const found = new Map();
+  const add = (uid, meta = {}) => {
+    if (!uid || typeof uid !== 'string') return;
+    const id = uid.trim();
+    if (!id || found.has(id)) return;
+    found.set(id, {
+      uid: id,
+      currency: meta.currency || '',
+      product: meta.product || '',
+      details: meta.details || ''
+    });
+  };
+  for (const account of Array.isArray(session?.accounts) ? session.accounts : []) {
+    if (typeof account === 'string') add(account);
+    else if (account && typeof account === 'object') add(account.uid, account);
+  }
+  for (const account of Array.isArray(session?.accounts_data) ? session.accounts_data : []) {
+    if (typeof account === 'string') add(account);
+    else if (account && typeof account === 'object') add(account.uid, account);
+  }
+  return [...found.values()].slice(0, 8);
 }
 
 function escapeHtml(value) {
@@ -39,8 +53,7 @@ export default async function handler(req, res) {
     let accounts = normalizeAccounts(session);
     if (!accounts.length && session?.session_id) {
       const details = await ebFetch(`/sessions/${encodeURIComponent(session.session_id)}`);
-      const byUid = Array.isArray(details?.accounts_data) ? details.accounts_data : [];
-      accounts = byUid.filter(a => a?.uid).slice(0, 8).map(a => ({ uid:a.uid, currency:'', product:'', details:'' }));
+      accounts = normalizeAccounts(details);
     }
     if (!accounts.length) throw new Error('Keine Konten zurückgegeben');
 
