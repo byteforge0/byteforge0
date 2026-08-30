@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Alltag",
   "short_name": "Alltag",
-  "description": "Geld, Sparziele, Auto, Tages-Tracker und Merkliste in einer privaten App.",
+  "description": "Geld, Sparziele, Auto und Tages-Tracker in einer privaten App.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
