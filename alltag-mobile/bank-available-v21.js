@@ -30,11 +30,12 @@
       revolut,
       c24,
       total: complete ? revolut + c24 : null,
-      fetchedAt: [revolutData?.fetchedAt, c24Data?.fetchedAt]
-        .filter(Boolean)
-        .sort()
-        .at(-1) || null
+      fetchedAt: [revolutData?.fetchedAt, c24Data?.fetchedAt].filter(Boolean).sort().at(-1) || null
     };
+  }
+
+  function fingerprint(bank) {
+    return bank.complete ? `${bank.revolut}|${bank.c24}` : 'loading';
   }
 
   function format(value) {
@@ -45,13 +46,14 @@
   function patchHome(bank) {
     const card = document.querySelector('.hero-balance');
     if (!card) return;
+    const fp = fingerprint(bank);
+    if (card.dataset.bankBalanceFingerprint === fp) return;
+    card.dataset.bankBalanceFingerprint = fp;
     card.classList.add('bank-derived-balance');
 
     const kicker = card.querySelector('.card-kicker');
     if (kicker) kicker.textContent = 'Noch verfügbar';
-
-    const edit = card.querySelector('[data-action="set-balance"]');
-    if (edit) edit.remove();
+    card.querySelector('[data-action="set-balance"]')?.remove();
 
     const number = card.querySelector('.hero-number');
     if (number) {
@@ -60,23 +62,22 @@
     }
 
     const row = card.querySelector('.budget-row');
-    if (row) {
-      row.innerHTML = bank.complete
-        ? `<span>Revolut <strong>${format(bank.revolut)}</strong></span><span>C24 <strong>${format(bank.c24)}</strong></span>`
-        : '<span>Revolut + C24 werden geladen …</span>';
-    }
+    if (row) row.innerHTML = bank.complete
+      ? `<span>Revolut <strong>${format(bank.revolut)}</strong></span><span>C24 <strong>${format(bank.c24)}</strong></span>`
+      : '<span>Revolut + C24 werden geladen …</span>';
 
     const breakdown = card.querySelector('.balance-breakdown');
-    if (breakdown) {
-      breakdown.innerHTML = bank.complete
-        ? '<span>Summe deiner beiden Bankkonten</span>'
-        : '<span>„Noch verfügbar“ wird nur aus den Bankständen berechnet</span>';
-    }
+    if (breakdown) breakdown.innerHTML = bank.complete
+      ? '<span>Summe deiner beiden Bankkonten</span>'
+      : '<span>„Noch verfügbar“ wird nur aus den Bankständen berechnet</span>';
   }
 
   function patchMoney(bank) {
     const card = document.querySelector('.available-card');
     if (!card) return;
+    const fp = fingerprint(bank);
+    if (card.dataset.bankBalanceFingerprint === fp) return;
+    card.dataset.bankBalanceFingerprint = fp;
     card.classList.add('bank-derived-balance');
 
     const wrap = card.querySelector(':scope > div');
