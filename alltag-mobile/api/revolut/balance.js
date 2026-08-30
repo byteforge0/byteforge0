@@ -1,4 +1,5 @@
 import { ebFetch, getCookie, verifyCookiePayload, cookie } from '../_lib/enablebanking.js';
+import { handleBankTransactions } from '../_lib/bank-transactions.js';
 
 const AVAILABLE_TYPES = ['ITAV', 'CLAV', 'FWAV', 'XPCD', 'OPAV'];
 const BOOKED_TYPES = ['ITBD', 'CLBD', 'OPBD', 'PRCD'];
@@ -12,6 +13,9 @@ function chooseBalance(rows, types) {
 }
 
 export default async function handler(req, res) {
+  if (String(req.query?.transactions || '') === '1') {
+    return handleBankTransactions(req, res, { cookieName: 'alltag_revolut', provider: 'revolut' });
+  }
   if (req.method !== 'GET') return res.status(405).json({ error: 'method_not_allowed' });
   res.setHeader('Cache-Control', 'no-store');
   try {
@@ -20,19 +24,20 @@ export default async function handler(req, res) {
 
     const results = await Promise.all(auth.accounts.map(async account => {
       try {
-        const data = await ebFetch(`/accounts/${encodeURIComponent(account.uid)}/balances`);
+        const uid = typeof account === 'string' ? account : account?.uid;
+        const data = await ebFetch(`/accounts/${encodeURIComponent(uid)}/balances`);
         const rows = Array.isArray(data?.balances) ? data.balances : [];
         const available = chooseBalance(rows, AVAILABLE_TYPES);
         const booked = chooseBalance(rows, BOOKED_TYPES);
         return {
-          uid: account.uid,
-          currency: account.currency || available?.balance_amount?.currency || booked?.balance_amount?.currency || '',
+          uid,
+          currency: account?.currency || available?.balance_amount?.currency || booked?.balance_amount?.currency || '',
           available: available ? Number(available.balance_amount.amount) : null,
           booked: booked ? Number(booked.balance_amount.amount) : null,
           updatedAt: available?.last_change_date_time || booked?.last_change_date_time || null,
         };
       } catch (e) {
-        return { uid: account.uid, error: e?.body || e?.message || 'balance_failed', status: e?.status || 500 };
+        return { uid: typeof account === 'string' ? account : account?.uid, error: e?.body || e?.message || 'balance_failed', status: e?.status || 500 };
       }
     }));
 
