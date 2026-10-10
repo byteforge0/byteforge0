@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="72" viewBox="0 0 1200 72" role="img" aria-label="GITHUB STATS">
+<defs>
+  <linearGradient id="ln" x1="0" x2="1"><stop offset="0" stop-color="#39d98a"/><stop offset="1" stop-color="#58e6ff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="tx" x1="0" x2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#9fe8c8"/></linearGradient>
+  <clipPath id="cl"><rect x="404" y="34" width="770" height="4"/></clipPath>
+</defs>
+<rect x=".5" y=".5" width="1199" height="71" rx="14" fill="#0d1117" stroke="#30363d"/>
+<text x="26" y="45" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="17" fill="#39d98a" opacity=".9">04</text>
+<text x="74" y="47" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="32" font-weight="800" letter-spacing="3" fill="url(#tx)">GITHUB STATS</text>
+<rect x="404" y="35" width="770" height="2" rx="1" fill="url(#ln)"/>
+<g clip-path="url(#cl)"><rect x="284" y="33" width="120" height="6" fill="url(#gl)">
+  <animate attributeName="x" values="284;1174" dur="3.2s" repeatCount="indefinite"/></rect></g>
+<rect x="1178" y="28" width="8" height="16" fill="#39d98a"><animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/></rect>
+</svg>

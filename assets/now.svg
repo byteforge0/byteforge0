@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="444" viewBox="0 0 1200 444" role="img" aria-label="What I am working on, learning and looking for">
+<defs><linearGradient id="sh0" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#39d98a" stop-opacity=".10"/><stop offset=".6" stop-color="#39d98a" stop-opacity="0"/></linearGradient><linearGradient id="sh1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#58e6ff" stop-opacity=".10"/><stop offset=".6" stop-color="#58e6ff" stop-opacity="0"/></linearGradient><linearGradient id="sh2" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ff4d5e" stop-opacity=".10"/><stop offset=".6" stop-color="#ff4d5e" stop-opacity="0"/></linearGradient><linearGradient id="sh3" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#b392f0" stop-opacity=".10"/><stop offset=".6" stop-color="#b392f0" stop-opacity="0"/></linearGradient></defs>
+<g transform="translate(0 0)">
+  <rect width="594" height="142" rx="14" fill="#0d1117" stroke="#30363d"/>
+  <rect width="594" height="142" rx="14" fill="url(#sh0)"/>
+  <rect x="0" y="26" width="4" height="90" rx="2" fill="#39d98a"/>
+  <rect width="594" height="142" rx="14" fill="none" stroke="#39d98a" stroke-width="2" stroke-linecap="round" stroke-dasharray="150 1472" opacity=".9">
+    <animate attributeName="stroke-dashoffset" values="0;-1472" dur="7s" begin="-0.0s" repeatCount="indefinite"/></rect>
+  <circle cx="34" cy="36" r="5" fill="#39d98a"><animate attributeName="opacity" values="1;.25;1" dur="2s" begin="0.0s" repeatCount="indefinite"/></circle>
+  <text x="50" y="41" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="13" letter-spacing="3" fill="#39d98a">WORKING ON</text>
+  <text x="30" y="84" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#f0f6fc">Cybersecurity labs</text>
+  <text x="30" y="114" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#8b949e">Kali Linux  |  practicing ethical hacking</text>
+</g><g transform="translate(606 0)">
+  <rect width="594" height="142" rx="14" fill="#0d1117" stroke="#30363d"/>
+  <rect width="594" height="142" rx="14" fill="url(#sh1)"/>
+  <rect x="0" y="26" width="4" height="90" rx="2" fill="#58e6ff"/>
+  <rect width="594" height="142" rx="14" fill="none" stroke="#58e6ff" stroke-width="2" stroke-linecap="round" stroke-dasharray="150 1472" opacity=".9">
+    <animate attributeName="stroke-dashoffset" values="0;-1472" dur="7s" begin="-1.4s" repeatCount="indefinite"/></rect>
+  <circle cx="34" cy="36" r="5" fill="#58e6ff"><animate attributeName="opacity" values="1;.25;1" dur="2s" begin="0.7s" repeatCount="indefinite"/></circle>
+  <text x="50" y="41" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="13" letter-spacing="3" fill="#58e6ff">LEARNING</text>
+  <text x="30" y="84" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#f0f6fc">Network security &amp; pentesting</text>
+  <text x="30" y="114" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#8b949e">Basics  |  phishing awareness analysis</text>
+</g><g transform="translate(0 154)">
+  <rect width="594" height="142" rx="14" fill="#0d1117" stroke="#30363d"/>
+  <rect width="594" height="142" rx="14" fill="url(#sh2)"/>
+  <rect x="0" y="26" width="4" height="90" rx="2" fill="#ff4d5e"/>
+  <rect width="594" height="142" rx="14" fill="none" stroke="#ff4d5e" stroke-width="2" stroke-linecap="round" stroke-dasharray="150 1472" opacity=".9">
+    <animate attributeName="stroke-dashoffset" values="0;-1472" dur="7s" begin="-2.8s" repeatCount="indefinite"/></rect>
+  <circle cx="34" cy="36" r="5" fill="#ff4d5e"><animate attributeName="opacity" values="1;.25;1" dur="2s" begin="1.4s" repeatCount="indefinite"/></circle>
+  <text x="50" y="41" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="13" letter-spacing="3" fill="#ff4d5e">LOOKING FOR HELP</text>
+  <text x="30" y="84" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#f0f6fc">Advanced penetration testing</text>
+  <text x="30" y="114" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#8b949e">Methods and Red-Team fundamentals</text>
+</g><g transform="translate(606 154)">
+  <rect width="594" height="142" rx="14" fill="#0d1117" stroke="#30363d"/>
+  <rect width="594" height="142" rx="14" fill="url(#sh3)"/>
+  <rect x="0" y="26" width="4" height="90" rx="2" fill="#b392f0"/>
+  <rect width="594" height="142" rx="14" fill="none" stroke="#b392f0" stroke-width="2" stroke-linecap="round" stroke-dasharray="150 1472" opacity=".9">
+    <animate attributeName="stroke-dashoffset" values="0;-1472" dur="7s" begin="-4.2s" repeatCount="indefinite"/></rect>
+  <circle cx="34" cy="36" r="5" fill="#b392f0"><animate attributeName="opacity" values="1;.25;1" dur="2s" begin="2.1s" repeatCount="indefinite"/></circle>
+  <text x="50" y="41" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="13" letter-spacing="3" fill="#b392f0">COLLABORATING ON</text>
+  <text x="30" y="84" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#f0f6fc">Security research &amp; CTFs</text>
+  <text x="30" y="114" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#8b949e">Plus defensive security projects</text>
+</g>
+<g transform="translate(0 308)">
+  <rect width="1200" height="62" rx="14" fill="#0d1117" stroke="#30363d"/>
+  <text x="30" y="38" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="13" letter-spacing="3" fill="#39d98a">FUN FACT</text>
+  <text x="150" y="38" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="17" fill="#c9d1d9">I enjoy breaking things in labs just to understand how to secure them better.</text>
+  <rect x="935" y="21" width="9" height="22" fill="#39d98a"><animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/></rect>
+</g>
+<g transform="translate(0 382)"><rect width="1200" height="62" rx="14" fill="#0d1117" stroke="#30363d"/>
+  <text x="30" y="38" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="13" letter-spacing="3" fill="#58e6ff">ASK ME ABOUT</text><g transform="translate(190 14)"><rect width="172" height="34" rx="17" fill="#161b22" stroke="#58e6ff" stroke-opacity=".5"/>
+  <text x="86" y="22" text-anchor="middle" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#e6edf3">Kali Linux tools</text>
+  <animateTransform attributeName="transform" type="translate" additive="sum" values="0 0;0 -3;0 0" dur="3.0s" repeatCount="indefinite"/></g><g transform="translate(376 14)"><rect width="258" height="34" rx="17" fill="#161b22" stroke="#58e6ff" stroke-opacity=".5"/>
+  <text x="129" y="22" text-anchor="middle" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#e6edf3">Cybersecurity fundamentals</text>
+  <animateTransform attributeName="transform" type="translate" additive="sum" values="0 0;0 -3;0 0" dur="3.6s" repeatCount="indefinite"/></g><g transform="translate(647 14)"><rect width="232" height="34" rx="17" fill="#161b22" stroke="#58e6ff" stroke-opacity=".5"/>
+  <text x="116" y="22" text-anchor="middle" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#e6edf3">Online safety practices</text>
+  <animateTransform attributeName="transform" type="translate" additive="sum" values="0 0;0 -3;0 0" dur="4.2s" repeatCount="indefinite"/></g></g>
+</svg>

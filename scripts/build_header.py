@@ -22,10 +22,9 @@ CH = 12.0                     # monospace char width at font-size 20
 LINES = [
     ("yazen@byteforge:~$ whoami", 3.2),
     ("> Cybersecurity | Red Team + Blue Team", 5.2),
-    ("> Fachinformatiker fuer Systemintegration", 7.6),
+    ("> IT Specialist for System Integration", 7.6),
     ("> CTFs | Kali Linux | Pentest Labs", 10.0),
 ]
-LINES[2] = ("> Fachinformatiker für Systemintegration", 7.6)
 RATE = 0.04
 Y0, DY, X0 = 232, 38, 64
 
